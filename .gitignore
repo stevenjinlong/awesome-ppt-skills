@@ -1,0 +1,4 @@
+awesome-ppt-output/
+*.pyc
+__pycache__/
+.DS_Store
