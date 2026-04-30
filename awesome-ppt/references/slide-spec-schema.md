@@ -58,6 +58,7 @@ Required slide fields:
 - `slide_image`: path to the generated full-slide image.
 - `image_prompt`: final prompt used for image generation. It must include every `rendered_text[].text` value verbatim.
 - `rendered_text`: complete list of visible text strings that must be rendered inside the generated image.
+  These strings are also the exact source text for any later `ppt-master` native editable reconstruction.
 
 Optional slide fields:
 
@@ -90,6 +91,7 @@ Rules:
 - Keep strings short and exact.
 - Do not include placeholder text.
 - Every `text` value must appear verbatim inside `image_prompt`.
+- Keep this list complete even if the image renders the text correctly; `ppt-master` uses it to rebuild editable native text without OCR.
 
 ## Editable Text Block
 

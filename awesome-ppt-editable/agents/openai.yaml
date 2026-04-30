@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awesome PPT Editable"
+  short_description: "Generate image-first decks, then rebuild editable PPTX with ppt-master"
+  default_prompt: "Use $awesome-ppt-editable to create a 5-slide technical deck about Transformer architecture, then rebuild it as a native editable PPTX with ppt-master."

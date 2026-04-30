@@ -1,10 +1,16 @@
 # Editability Policy
 
-V1 decks are image-model-rendered PPTX files:
+V1 decks have two explicit modes:
+
+- `$awesome-ppt-std`: stable image-first PPTX generation.
+- `$awesome-ppt-editable`: experimental image-first generation plus `ppt-master` native reconstruction.
+
+Standard mode decks are image-model-rendered PPTX files:
 
 - Generated raster images provide the complete visible slide, including text.
 - PowerPoint assembly turns those rendered images into a deck.
 - Optional native PPT text boxes are helper layers only, not the default content path.
+- Full native editability is available only through a second-stage `ppt-master` reconstruction pass.
 
 ## Image By Default
 
@@ -27,6 +33,18 @@ Rules:
 - If used, keep `editable_text` aligned with `rendered_text` so future rebuilding is possible.
 - Tell the user clearly whether text is baked into images, editable as native PPT text, or both.
 
+## PPT Master Native Reconstruction
+
+When the user asks for a fully editable deck, use `$awesome-ppt-editable` when possible. Do not try to patch the image-first deck with duplicated overlays. Instead:
+
+- Build and verify the image-first PPTX first.
+- Export a `ppt-master` handoff from `deck.json`.
+- Use `ppt-master` to rebuild each slide as native editable SVG/PowerPoint elements.
+- Use generated slide images only as visual references.
+- Use `rendered_text` as the exact text source; do not OCR or paraphrase from screenshots.
+
+The final response must distinguish the two artifacts: the image-first PPTX and the `ppt-master` optimized native editable PPTX. If only the handoff was created and `ppt-master` did not export a native PPTX, say that explicitly.
+
 ## When To Pause
 
 Pause and explain the tradeoff before proceeding if:
@@ -35,6 +53,7 @@ Pause and explain the tradeoff before proceeding if:
 - The slide needs a dense table or many exact numbers.
 - The user asks for both "all text rendered by image model" and "all text natively editable" as hard requirements.
 - The generated image repeatedly misspells required text after targeted retries.
+- `ppt-master` is unavailable but the user explicitly requires native editability.
 
 ## Quality Gates
 
@@ -49,3 +68,4 @@ A deck fails v1 quality if:
 - A slide has no clear purpose.
 - The output PPTX cannot be written.
 - The final response implies full native text editability when the visible text is baked into images.
+- The final response implies `ppt-master` produced a native editable deck if only the handoff brief was created.

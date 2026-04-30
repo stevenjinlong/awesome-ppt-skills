@@ -1,4 +1,4 @@
 interface:
   display_name: "Awesome PPT"
-  short_description: "Generate full-slide PPT decks with gpt-image-2"
-  default_prompt: "Use $awesome-ppt to create an 8-slide image-first deck about a new AI writing product."
+  short_description: "Core workflow for image-first PPT decks"
+  default_prompt: "Use $awesome-ppt-std to create an 8-slide image-first deck about a new AI writing product, or $awesome-ppt-editable when a ppt-master editable reconstruction is required."

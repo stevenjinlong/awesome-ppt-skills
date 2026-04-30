@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build an editable PPTX from an Awesome PPT deck spec.
+"""Build an image-first PPTX from an Awesome PPT deck spec.
 
 The writer intentionally uses only the Python standard library. It creates a
 minimal OOXML presentation with one full-slide raster image per slide plus

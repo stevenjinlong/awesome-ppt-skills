@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awesome PPT Std"
+  short_description: "Generate standard image-first PPT decks"
+  default_prompt: "Use $awesome-ppt-std to create a 5-slide technical deck about Transformer architecture, with a polished visual style and all visible text rendered inside the slide images."

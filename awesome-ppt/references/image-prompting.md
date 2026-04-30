@@ -6,6 +6,8 @@ Generate one complete slide image per slide. The generated image is the final vi
 
 The image prompt must contain every visible text string verbatim. Do not ask the image model to create a generic background and do not rely on PowerPoint text boxes to add the real content later.
 
+Before writing per-slide prompts, identify the closest deck theme and read `theme-style-prompt-library.md`. Use the selected style prompt as a baseline for visual vocabulary, then rewrite it for the user's exact topic, audience, language, and requested constraints. Do not paste a generic library prompt unchanged.
+
 ## Prompt Template
 
 ```text
@@ -34,7 +36,7 @@ Typography direction:
 <font mood, scale, weight, hierarchy, alignment, line spacing>
 
 Style:
-<palette, texture, lighting, motif, brand mood>
+<adapted theme-library style: palette, texture, lighting, motif, brand mood>
 
 Avoid:
 watermarks, logos unless provided, misspelled text, gibberish text, extra words, tiny unreadable labels, fake UI text, clutter.
