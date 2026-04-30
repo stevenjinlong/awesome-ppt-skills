@@ -28,6 +28,10 @@ CORE_REFERENCES = (
 README_ASSETS = (
     "examples/transformer-architecture-image-first/preview.jpg",
 )
+README_FILES = (
+    "README.md",
+    "README.zh-CN.md",
+)
 IGNORED_OUTPUT_DIRS = (
     "awesome-ppt-output",
 )
@@ -82,6 +86,17 @@ def main() -> int:
             continue
         if asset.stat().st_size > 1_000_000:
             errors.append(f"{rel_path}: README asset should stay under 1 MB")
+
+    for rel_path in README_FILES:
+        if not (ROOT / rel_path).exists():
+            errors.append(f"missing {rel_path}")
+
+    readme_en = ROOT / "README.md"
+    readme_zh = ROOT / "README.zh-CN.md"
+    if readme_en.exists() and "README.zh-CN.md" not in readme_en.read_text(encoding="utf-8"):
+        errors.append("README.md must link to README.zh-CN.md")
+    if readme_zh.exists() and 'href="README.md"' not in readme_zh.read_text(encoding="utf-8"):
+        errors.append("README.zh-CN.md must link back to README.md")
 
     gitignore = ROOT / ".gitignore"
     gitignore_text = gitignore.read_text(encoding="utf-8") if gitignore.exists() else ""
